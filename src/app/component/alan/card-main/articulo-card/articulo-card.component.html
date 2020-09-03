@@ -1,0 +1,93 @@
+<br>
+<div class="d-flex justify-content-around">
+    <div class="media">
+        <div class="media-left">
+            <fa-icon class="mr-3 fa-2x" [icon]='faBiohazard'></fa-icon>
+        </div>
+        <div class="media-body">
+            <small class="media-heading">Nombre</small>
+            <p class="h6"><strong>{{articulo.nombre}}</strong></p>
+        </div>
+    </div>
+    <div class="media">
+        <div class="media-left">
+            <fa-icon class="mr-3 fa-2x" [icon]='faMoneyBill'></fa-icon>
+        </div>
+        <div class="media-body">
+            <small class="media-heading">Precio</small>
+            <p class="h6"><strong>{{articulo.precio }}</strong></p>
+        </div>
+    </div>
+    <div class="media">
+        <div class="media-left">
+            <fa-icon class="mr-3 fa-2x" [icon]='faInfo'></fa-icon>
+        </div>
+        <div class="media-body">
+            <small class="media-heading">Categoria</small>
+            <p class="h6"><strong>{{articulo.categoria }}</strong></p>
+        </div>
+    </div>
+
+</div>
+<hr>
+<div class="d-flex justify-content-around">
+    <div class="media">
+        <div class="media-left">
+            <fa-icon class="mr-3 fa-2x" [icon]='faInfo'></fa-icon>
+        </div>
+        <div class="media-body">
+            <small class="media-heading">Detalle</small>
+            <p class="h6"><strong>{{articulo.detalle}}</strong></p>
+        </div>
+    </div>
+    <div class="media">
+        <div class="media-left">
+            <fa-icon class="mr-3 fa-2x" [icon]='faTimes'></fa-icon>
+        </div>
+        <div class="media-body">
+            <small class="media-heading">Estado</small>
+            <p class="h6"><strong>{{articulo.estado}}</strong></p>
+        </div>
+    </div>
+</div>
+<hr>
+<br>
+
+<div>
+    <div class="text-center">
+        <fa-icon class="fa-2x"></fa-icon>
+    </div>
+    <hr>
+    <h5>Listado de usuarios</h5>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Nombres
+                </th>
+                <th>
+                    Apellidos
+                </th>
+                <th>
+                    Direccion
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    {{usuario.nombres}}
+                </td>
+                <td>
+                    {{usuario.apellidos}}
+                </td>
+                <td>
+                    {{usuario.direccion}}
+                </td>
+                
+            </tr>
+
+        </tbody>
+    </table>
+</div>

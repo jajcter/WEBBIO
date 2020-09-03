@@ -1,0 +1,37 @@
+<nav class="nav nav-pills nav-fill">
+  <!--para enviar valores por link-->
+  <!--<a class="nav-item nav-link" [routerLink]="['/Galeria','Hombre','Outfit']">Inicio</a>-->
+  <a class="nav-item nav-link" routerLink="/">Inicio</a>
+  <a class="nav-item nav-link" routerLink="/tienda">Categoria</a>
+  <a class="nav-item nav-link" routerLink="/login">Vender</a>
+  <a class="nav-item nav-link" routerLink="/register" tabindex="-1" aria-disabled="true">Crear cuenta</a>
+  <!--  -->
+  <span><a class="btn btn-outline-primary" routerLink="/usuarios" href="">Iniciar secion</a></span>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#carrito">
+      Carrito
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="carrito" tabindex="-1" role="dialog" aria-labelledby="carritoTitle"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="carritoTitle">Carrito</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <app-carrito-main></app-carrito-main>
+          </div>
+          <!--div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div-->
+        </div>
+      </div>
+    </div>
+</nav>
+

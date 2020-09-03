@@ -1,0 +1,72 @@
+<div class="text-center">
+    <fa-icon class="fa-2x"></fa-icon>
+</div>
+<hr>
+<h5>Detalle del carrito</h5>
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Imagen
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Precio
+            </th>
+            <th>
+                Categoria
+            </th>
+            <th>
+                Detalle
+            </th>
+            <th>
+                Unidad
+            </th>
+            <th>
+                Fecha
+            </th>
+            <th>
+                Usuario
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of carrito;">
+            <td>
+                {{item.src}}
+            </td>
+            <td>
+                {{item.nombre}}
+            </td>
+            <td>
+                {{item.precio}}
+            </td>
+            <td>
+                {{item.categoria}}
+            </td>
+            <td>
+                {{item.detalle}}
+            </td>
+            <td>
+                {{item.estado}}
+            </td>
+            <td>
+                {{item.fecha}}
+            </td>
+            <td>
+                {{item.idUsuario}}
+            </td>
+            <td class="btn-group">
+                <button [routerLink]="['/usuarios',item.nombres, item.idUsuario]" class="btn btn-outline-info">
+                    <!--fa-icon [icon]="faEye"></fa-icon-->
+                </button>
+            </td>
+        </tr>        
+    </tbody>
+</table>
+<div class="text-center">
+    <button type="button" routerLink="" class="btn btn-primary btn-block"><strong>Comprar Todo</strong></button>
+</div>
