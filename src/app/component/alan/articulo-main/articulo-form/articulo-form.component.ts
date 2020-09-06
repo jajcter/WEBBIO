@@ -37,11 +37,9 @@ export class ArticuloFormComponent implements OnInit {
           this.id_nuevo=params['id'];
         }
         this.articulo.idUsuario=this.id_nuevo;
-        alert('Mira como esta este objeto: ' + this.articulo.nombre)
         //console.log("Mira este objeto: " + this.articulo.nombre);
       }
     );
-    alert('Mira como esta este objeto: ' + this.articulo.nombre)
     this.inputForm();
   }
 
@@ -67,7 +65,7 @@ export class ArticuloFormComponent implements OnInit {
       console.error('Error en formulario');
       return;
     }
-    
+
     this.articuloService.save(this.articulo,this.id_nuevo).subscribe(
       result => {
         this.submitted = false;

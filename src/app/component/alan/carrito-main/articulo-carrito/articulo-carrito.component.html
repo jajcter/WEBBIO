@@ -9,9 +9,9 @@
         <td>
           <strong class="text-center">{{ cartItem.precio | currency:'USD' }}</strong>
         </td>
-        <button (click)="deleteTask(cartItem)" class="btn btn-outline-danger">
+        <button class="text-right" (click)="deleteTask(cartItem)" class="btn btn-outline-danger">
           <fa-icon [icon]="faTrash"></fa-icon>
-      </button>
+        </button>
         <!--td>
           X
         </td-->

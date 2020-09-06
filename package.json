@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~10.0.2",
+    "@angular/cdk": "^10.2.0",
     "@angular/common": "~10.0.2",
     "@angular/compiler": "~10.0.2",
     "@angular/core": "~10.0.2",
@@ -25,6 +26,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@popperjs/core": "^2.4.4",
     "alertifyjs": "^1.13.1",
+    "angularx-social-login": "^3.2.1",
+    "aos": "^2.3.4",
     "boostrap": "^2.0.0",
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",

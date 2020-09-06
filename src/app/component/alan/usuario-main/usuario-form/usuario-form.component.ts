@@ -62,8 +62,8 @@ export class UsuarioFormComponent implements OnInit {
   onSubmit() : void {
 
     this.submitted = true;
-    alertify.set('notifier','position', 'top-right');
     if(this.form.invalid){
+      alertify.set('notifier','position', 'top-right');
       alertify.warning('Error en el formulario');
       return;
     }
@@ -71,9 +71,13 @@ export class UsuarioFormComponent implements OnInit {
     this.usuarioService.save(this.usuario).subscribe(
       result => {
         this.submitted = false;
+        alertify.set('notifier','position', 'top-right');
         alertify.warning(result);
         this.router.navigate(['/tienda']);
         this.flagToReload.emit(true);
+      },err=>{
+        alertify.set('notifier','position', 'top-right');
+        alertify.warning('Error: '+err+'-'+localStorage.getItem('servInterceptor'));
       }
     );
   }

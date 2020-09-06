@@ -25,19 +25,16 @@ export class TokenInterceptorService implements HttpInterceptor{
     return next.handle(request).do(next=>{
       if(next instanceof HttpResponse){
         if(next.status === 201 ){//CORRETO
-          Alertify.set('notifier','position', 'top-right');//posiscion
-          Alertify.success('Correcto');
+          localStorage.setItem('tInterceptor','true');
         }
 
       }},
       error =>{
         if (error.status === 400) {
-          Alertify.set('notifier','position', 'top-right');//posiscion
-          Alertify.warning('Incorrecto : 400 '+ error);
+          localStorage.setItem('tInterceptor',error);
         }
         if (error.status === 0 ){
-          Alertify.set('notifier','position', 'top-right');//posiscion
-          Alertify.warning('Incorrecto TOKEN: 0 ' + error);
+          localStorage.setItem('tInterceptor',error);
         }
       }
       );

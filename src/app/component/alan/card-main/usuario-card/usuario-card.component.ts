@@ -55,7 +55,6 @@ export class UsuarioCardComponent implements OnInit {
   toUpdate($event) : void{
     this.mainArticulo = $event;
     //this.mainUsuario.fecha_nacimiento = this.mainUsuario.fecha_nacimiento.replace("T00:00:00","");
-    console.log(this.mainArticulo);
   }
 
   toReload($event) : void {

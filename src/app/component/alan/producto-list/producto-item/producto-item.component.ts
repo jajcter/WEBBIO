@@ -10,7 +10,9 @@ export class ProductoItemComponent implements OnInit {
 
   @Input() articuloItem:Articulo;
 
-  constructor(private articuloServices:ArticuloService) { }
+  constructor(
+    private articuloServices:ArticuloService
+    ) { }
 
   ngOnInit(): void { }
 

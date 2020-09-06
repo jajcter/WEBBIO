@@ -53,6 +53,17 @@ import { VentaFormComponent } from "./component/alan/venta-main/venta-form/venta
 import { NegocioFormComponent } from "./component/alan/negocio-main/negocio-form/negocio-form.component";
 import { NegocioListComponent } from "./component/alan/negocio-main/negocio-list/negocio-list.component";
 import { VentaListComponent } from "./component/alan/venta-main/venta-list/venta-list.component";
+//login social
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+  AmazonLoginProvider,
+} from 'angularx-social-login';
+
+import { ScrollingModule } from "@angular/cdk/scrolling";
+import { ModalComponent } from './header/modal/modal.component';
+
 
 @NgModule({
   declarations: [
@@ -100,7 +111,8 @@ import { VentaListComponent } from "./component/alan/venta-main/venta-list/venta
     CarritoMainComponent,
     ArticuloMainComponent,
     ArticuloCarritoComponent,
-    DetalleCarritoComponent
+    DetalleCarritoComponent,
+    ModalComponent
 
   ],
   imports: [
@@ -109,13 +121,33 @@ import { VentaListComponent } from "./component/alan/venta-main/venta-list/venta
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    //social
+    SocialLoginModule,
+    //scroll
+    ScrollingModule,
   ],
-  providers: [
-    {
-      provide: LOCALE_ID,
-      useValue:'es-EC'
-    },
+  providers: [{
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+      autoLogin: false,
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider('398428956597-mlk9c8hqcos0qrig7rsdr1f7dsv80f56.apps.googleusercontent.com'),
+        },
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider('239523637339943'),
+        }/*,
+        {
+          id: AmazonLoginProvider.PROVIDER_ID,
+          provider: new AmazonLoginProvider('clientId'),
+        },*/
+      ],
+    } as SocialAuthServiceConfig,
+  },
+
     UserService,{
       provide: HTTP_INTERCEPTORS,
       useClass: ServicesInterceptor,

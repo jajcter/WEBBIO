@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user/user';
+import { Articulo } from 'src/app/models/articulo/articulo';
+import { ArticuloService } from 'src/app/services/articulo/articulo.service';
 
 @Component({
   selector: 'app-home-main',
@@ -13,12 +15,18 @@ export class HomeMainComponent implements OnInit {
   mainTitle : string;
   mainReload : boolean;
 
-  constructor() { }
+  listArticulo : Articulo[];
+
+  constructor(
+    private articuloService:ArticuloService
+  ) { }
 
   ngOnInit(): void {
     this.onInit();
-    this.grabar_localstorage();
     this.obtener_localstorage();
+    this.articuloService.listArticulo('Mascarillas').subscribe(res=>{
+      this.listArticulo=res;
+    })
     //Eliminar de local storage
     localStorage.removeItem("usuario");
   }
@@ -39,7 +47,6 @@ export class HomeMainComponent implements OnInit {
     let nombre = localStorage.getItem("nombre");
     let persona = JSON.parse( localStorage.getItem("persona") );
 
-    alert('home-main: '+nombre);
   }
 
   grabar_localstorage() {
@@ -56,6 +63,12 @@ export class HomeMainComponent implements OnInit {
     localStorage.setItem('nombre', nombre);
     localStorage.setItem("persona", JSON.stringify(persona));
     //localStorage.setItem("persona", persona);
+  }
+
+  listArticulos(criterio){
+    this.articuloService.listArticulo(criterio).subscribe(res=>{
+      this.listArticulo=res;
+    })
   }
 
 }

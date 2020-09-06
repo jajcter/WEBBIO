@@ -19,19 +19,18 @@ export class ServicesInterceptor implements HttpInterceptor {
       if(next instanceof HttpResponse){
         if(next.status === 200)
         {
-          alertify.success('Correcto');
+          localStorage.setItem('servInterceptor','true');
         }
 
       }
     }, error => {
-      console.error(error);
       if(error.status === 400)
         {
-          alertify.error('Error: 400 '+error);
+          localStorage.setItem('servInterceptor',error);
         }
         if(error.status === 0)
         {
-          alertify.error('Error SERVICES: 0 '+error.message);
+          localStorage.setItem('servInterceptor',error);
         }
     });
   }

@@ -65,24 +65,24 @@ export class ArticuloTablaComponent implements OnInit {
     this.ArticuloToEdit.emit(a);
   }
 
-  delete(a:Articulo) :void {
-    alertify.confirm('Eliminar artículo','¿Está seguro de eliminar el artículo: '+a.nombre+'. Precio: $'+a.precio,
-      function(){
-        alertify.set('notifier','positio','top-right')
-        this.articuloService.delete(a).subscribe(result => {
-          alertify.success('Eliminar - '+result);
-          this.listArticulos();
-          }
-        );
+  deletee(a:Articulo) :void {
+    alertify.confirm('Eliminar articulo',"This is a confirm dialog.",
+    ()=>{//asi se ejecuta codigo en alertify
+      this.articuloService.delete(a).subscribe(res=>{
+        alertify.set('notifier','position', 'top-right');
+        alertify.success('A eliminado correctamente');
+        this.listArticulos();
+      },err=>{
+        alertify.set('notifier','position', 'top-right');
+        alertify.success('A ocur  rido un error: '+err);
+        alertify.success('A ocurrido un error: '+localStorage.getItem('servInterceptor'));
+      });
 
-      },
-      function(){
-        alertify.set('notifier','positio','bottom-right')
-        alertify.error('Declinar')
-      }
-    );
-
-
-
-  }
+  },
+  function(){
+    alertify.set('notifier','position', 'top-right');
+    alertify.error('A declinado de Eliminar');
+  });
+  localStorage.removeItem('servInterceptor');
+  }//end delete
 }

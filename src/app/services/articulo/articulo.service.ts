@@ -31,13 +31,14 @@ export class ArticuloService {
   }
 
   listArticulo(criterio:string): Observable<Articulo[]> {
-    return this.http.get<Articulo[]>(this.url + "Get?criterio=" + criterio, this.httpOptions)
+    return this.http.get<Articulo[]>(this.url + "/Get?criterio=" + criterio, this.httpOptions)
       .pipe(
         retry(1)
       );
   }
 
   delete(a: Articulo) : Observable<any> {
+
     const option={
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -63,7 +64,7 @@ export class ArticuloService {
   // Parte de Articulos del usuario
   list(id:number): Observable<Articulo[]> {//este metodo nos falta---------------------------------
 
-    return this.http.get<Articulo[]>(this.url + "/Get/" + id + "?dato=c", this.httpOptions)
+    return this.http.get<Articulo[]>(this.url + "/ListId/" + id , this.httpOptions)
       .pipe(
         retry(1)
       );

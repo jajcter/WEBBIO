@@ -30,13 +30,11 @@ export class UsuarioMainComponent implements OnInit {
   toUpdate($event) : void{
     this.mainUsuario = $event;
     //this.mainUsuario.fecha_nacimiento = this.mainUsuario.fecha_nacimiento.replace("T00:00:00","");
-    console.log(this.mainUsuario);
     this.mainTitle = "Editando registro de " + $event.nombres + " " + $event.apellidos;
   }
 
   toReload($event) : void {
     this.onInit();
-    console.log($event);
     this.mainReload = $event;
   }
 

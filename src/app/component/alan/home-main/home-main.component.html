@@ -1,70 +1,45 @@
-
-<div id="carousel1" class="carousel slide carousel-fade" data-ride="carousel">
-    <div class="carousel-inner">
-    <div class="carousel-item active">
-
-        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Primer slide"><title>Placeholder</title><rect width="100%" height="100%" fill="#2196f3"></rect><text x="45%" y="50%" fill="#eceff1" dy=".3em">Primer slide</text></svg>
+<div class=" row">
+  <div class="col-3 border-right">
+    <h1>Home main</h1>
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link active" id="mascarillas-tab" data-toggle="pill" href="#mascarillas" role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="listArticulos('Mascarillas')">Mascarillas</a>
+      <a class="nav-link" id="traje-tab" data-toggle="pill" href="#traje" role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="listArticulos('Guantes')">Trajes de Bioseguridad</a>
+      <a class="nav-link" id="guantes-tab" data-toggle="pill" href="#guantes" role="tab" aria-controls="v-pills-messages" aria-selected="false" (click)="listArticulos('Trajes')">Guantes</a>
+      <a class="nav-link" id="otros-tab" data-toggle="pill" href="#otros" role="tab" aria-controls="v-pills-settings" aria-selected="false" (click)="listArticulos('Otros')">Otros</a>
     </div>
-    <div class="carousel-item">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Segundo slide"><title>Placeholder</title><rect width="100%" height="100%" fill="#f50057"></rect><text x="45%" y="50%" fill="#eceff1" dy=".3em">Segundo slide</text></svg>
-    </div>
-    <div class="carousel-item">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Tercer slide"><title>Placeholder</title><rect width="100%" height="100%" fill="#ff3d00"></rect><text x="45%" y="50%" fill="#eceff1" dy=".3em">Tercer slide</text></svg>
-    </div>
-    </div>
-
-    <!--Controles NEXT y PREV-->
-    <a class="carousel-control-prev" href="#carousel1" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carousel1" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-    <!--Controles de indicadores-->
-    <ol class="carousel-indicators">
-        <li data-target="#carousel1" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel1" data-slide-to="1"></li>
-        <li data-target="#carousel1" data-slide-to="2"></li>
-    </ol>
-
-</div>
-<br>
-<div class="album py-5 bg-light">
-    <div class="container">
-        <div class="page-header text-center">
-            <h4 >Productos</h4>
-        </div>
+  </div>
+  <!--Contenido-->
+  <div class="col-9">
+    <div class="tab-content" id="v-pills-tabContent">
+      <div class="tab-pane fade show active" id="mascarillas" role="tabpanel" aria-labelledby="mascarillas-tab">
+        Mascarillas
         <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <h5 class="card-title">Guantes</h5>
-                  <img class="card-img-top" src="../../../assets/img/articulos/guantesBlanco.png" alt="Card image cap">
-                  <a href="#" class="btn btn-primary">Obtener</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <h5 class="card-title">Mascarillas</h5>
-                  <img class="card-img-top" src="../../../assets/img/articulos/mascarillaBio3m.jpg" alt="Card image cap">
-                  <a href="#" class="btn btn-primary">Obtener</a>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <h5 class="card-title">Trajes</h5>
-                  <img class="card-img-top" src="../../../assets/img/articulos/trajeBioAzul.jpg" alt="Card image cap">
-                  <a href="#" class="btn btn-primary">Obtener</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <h5 class="card-title">Otros</h5>
-                  <img class="card-img-top" src="../../../assets/img/articulos/guantesBlanco.png" alt="Card image cap">
-                  <a href="#" class="btn btn-primary">Obtener</a>
-                </div>
-            </div>
+          <div class="col-md-4" *ngFor="let articulo of listArticulo">
+            <app-articulo [articuloItem]="articulo"></app-articulo>
+          </div>
         </div>
+      </div>
+      <div class="tab-pane fade" id="traje" role="tabpanel" aria-labelledby="traje-tab">Trajes de Bioseguridad
+        <div class="row">
+          <div class="col-md-4" *ngFor="let articulo of listArticulo">
+            <app-articulo [articuloItem]="articulo"></app-articulo>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="guantes" role="tabpanel" aria-labelledby="guantes-tab">Guantes
+        <div class="row">
+          <div class="col-md-4" *ngFor="let articulo of listArticulo">
+            <app-articulo [articuloItem]="articulo"></app-articulo>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="otros" role="tabpanel" aria-labelledby="otros-tab">Otros
+        <div class="row">
+          <div class="col-md-4" *ngFor="let articulo of listArticulo">
+            <app-articulo [articuloItem]="articulo"></app-articulo>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

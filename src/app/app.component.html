@@ -1,16 +1,18 @@
 <ng-container *ngIf="!autServices.logIn(); else loged">
-<!--desconectado-->
-  <app-header></app-header>
+<!--desconectado - cliente-->
+
+  <app-modal ></app-modal>
+
 </ng-container>
 
 
 <ng-template #loged>
   <!--Vista cliente  CONECTADO-->
-  <app-header-user ></app-header-user>
+  <app-header-user></app-header-user>
 </ng-template>
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+  <div class="mg-left mt-4 h-100" role="main">
+    <router-outlet ></router-outlet>
+  </div>
 
 <div >
   <app-footer></app-footer>

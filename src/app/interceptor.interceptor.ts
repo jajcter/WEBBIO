@@ -20,27 +20,22 @@ export class InterceptorInterceptor implements HttpInterceptor {
     return next.handle(request).do(next=>{
       if(next instanceof HttpResponse){
         if(next.status === 200 ){//CORRETO
-          alertify.set('notifier','position', 'top-right');//posiscion
-          alertify.success('Correcto 200');
+          localStorage.setItem('tInterceptor','true');
         }
         if(next.status === 201 ){//CORRETO
-          alertify.set('notifier','position', 'top-right');//posiscion
-          alertify.success('Correcto 201');
+          localStorage.setItem('tInterceptor','true');
         }
 
       }},
       error =>{
         if (error.status === 400) {
-          alertify.set('notifier','position', 'top-right');//posiscion
-          alertify.warning('Incorrecto : 400');
+          localStorage.setItem('tInterceptor',error);
         }
         if (error.status === 409 ){
-          alertify.set('notifier','position', 'top-right');//posiscion
-          alertify.warning('Incorrecto : 409');
+          localStorage.setItem('tInterceptor',error);
         }
         if (error.status === 0 ){
-          alertify.set('notifier','position', 'top-right');//posiscion
-          alertify.warning('Incorrecto INTERCEPTOR: 0');
+          localStorage.setItem('tInterceptor',error);
         }
       }
       );
