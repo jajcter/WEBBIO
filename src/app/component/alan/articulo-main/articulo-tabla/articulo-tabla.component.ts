@@ -3,6 +3,7 @@ import { ArticuloService } from 'src/app/services/articulo/articulo.service';
 import { Articulo } from 'src/app/models/articulo/articulo';
 import { ActivatedRoute } from '@angular/router';
 import { faEye, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { NewArticulo } from 'src/app/models/new-articulo';
 declare let alertify:any;
 
 @Component({
@@ -60,8 +61,8 @@ export class ArticuloTablaComponent implements OnInit {
   }
 
   update(a:Articulo) :void {
-    //console.log("Mira este objeto: " + a.nombre);
-
+    console.log('articulo tabla')
+    console.log(a)
     this.ArticuloToEdit.emit(a);
   }
 

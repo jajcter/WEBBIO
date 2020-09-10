@@ -16,16 +16,16 @@
                 Precio
             </th>
             <th>
-                Categoria
+                Cantidad
             </th>
             <th>
                 Detalle
             </th>
             <th>
-                Unidad
+                Subtotal
             </th>
             <th>
-                Fecha
+                Unidad
             </th>
             <th>
                 Usuario
@@ -33,40 +33,66 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-        <tr *ngFor="let item of carrito;">
+    <tbody >
+        <tr *ngFor="let item of carrito; index as i">
             <td>
                 {{item.src}}
             </td>
             <td>
-                {{item.nombre}}
+                {{item.nombre }}
             </td>
             <td>
-                {{item.precio}}
+                <!--onchange="sumar(this.value);"-->
+                <label>{{item.precio}}</label>
             </td>
             <td>
-                {{item.categoria}}
+                {{item.cantidad}}
+            </td>
+            <td><!--Sub total-->
+                <div class="form-group">
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    #n22 (keyup)="0" value="1" (keyup)="onKey($event, item.precio, i)">
+                    <small id="emailHelp" class="form-text text-muted">{{texto}}</small>
+                </div>
             </td>
             <td>
-                {{item.detalle}}
+                <span id="spTotal" >{{totalVenta((item.precio),(n22.value))}} * Iva = {{(item.precio*1)*(n22.value*1)*0.12}}</span>
             </td>
             <td>
                 {{item.estado}}
             </td>
             <td>
-                {{item.fecha}}
-            </td>
-            <td>
-                {{item.idUsuario}}
+                <div class="btn-group">
+                    <button class="btn btn-outline-danger">
+                        <fa-icon [icon]="faEnvelope"></fa-icon>Mensaje
+                    </button>
+                    <button [routerLink]="['/usuarios', item.idUsuario]" class="btn btn-outline-info">
+                      {{item.usuario.nombres}} {{item.usuario.apellidos}}
+                  </button>
+                </div>
             </td>
             <td class="btn-group">
-                <button [routerLink]="['/usuarios',item.nombres, item.idUsuario]" class="btn btn-outline-info">
-                    <!--fa-icon [icon]="faEye"></fa-icon-->
+                <button (click)="comprarArticulo(item, n22.value*1, (item.precio*1)*(n22.value*1))" class="btn btn-outline-danger">
+                    <fa-icon [icon]="faDollarSign"></fa-icon> comprar
+                </button>
+                <button (click)="deleteTask(item)" class="btn btn-outline-danger">
+                    <fa-icon [icon]="faTrash"></fa-icon> Borrar del carrito
                 </button>
             </td>
-        </tr>        
+        </tr>
     </tbody>
 </table>
+<div>
+    <span>Iva 12%</span>
+</div>
+<div class="input-group mb-2 mr-sm-2">
+    <div class="input-group-prepend">
+        <div class="input-group-text">Total</div>
+    </div>
+    <!--input #box (keyup)="0" (click)="comprarVenta($event)" type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder=""-->
+
+    <span>{{total}}</span>
+</div>
 <div class="text-center">
-    <button type="button" routerLink="" class="btn btn-primary btn-block"><strong>Comprar Todo</strong></button>
+    <button (click)="comprarArticulos()" type="button" class="btn btn-primary btn-block"><strong>Comprar Todo</strong></button>
 </div>

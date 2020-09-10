@@ -18,12 +18,9 @@ export class ArticuloCarritoComponent implements OnInit {
   constructor( private msg: MessengerService ) { }
 
   ngOnInit(): void {
-    //alert("mostrando dato: " + this.cartItem.nombre);
   }
 
   deleteTask(task: Articulo) {
-    if(confirm('Seguro quieres borrarlo?')) {
-      this.msg.deleteTask(task);
-    }
+    this.msg.deleteArticulo(task);
   }
 }

@@ -20,12 +20,12 @@ export class ArticuloService {
   };
 
   constructor(private http:HttpClient) { }
-
-  save(a:Articulo,idUsuario:number) : Observable<any> {
+//se necesita el id para validar el toquen
+  save(a,idUsuario) : Observable<any> {
     a.idUsuario=idUsuario;
     let alumnoBody = JSON.stringify(a);
     if(a.idArticulo === undefined){
-      return this.http.post<any>(this.url+'/Add', alumnoBody, this.httpOptions);
+      return this.http.post<any>(this.url+'/Post', alumnoBody, this.httpOptions);
     }
     return this.http.post<any>(this.url+'/UpDate', alumnoBody, this.httpOptions);
   }
@@ -64,7 +64,7 @@ export class ArticuloService {
   // Parte de Articulos del usuario
   list(id:number): Observable<Articulo[]> {//este metodo nos falta---------------------------------
 
-    return this.http.get<Articulo[]>(this.url + "/ListId/" + id , this.httpOptions)
+    return this.http.post<Articulo[]>(this.url + "/ListId/" + id , this.httpOptions)
       .pipe(
         retry(1)
       );

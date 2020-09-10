@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Articulo } from 'src/app/models/articulo/articulo';
 import { ArticuloService } from 'src/app/services/articulo/articulo.service';
 import { ActivatedRoute } from '@angular/router';
-import { faBiohazard, faMoneyBill, faInfo, faSave, faTimes, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faLayerGroup, faTags,faIdBadge, faClipboardList,faMoneyBill, faInfo, faSave } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/services/user/user.service';
 import { User } from 'src/app/models/user/user';
 
@@ -13,15 +13,18 @@ import { User } from 'src/app/models/user/user';
 })
 export class ArticuloCardComponent implements OnInit {
 
-  faBiohazard =faBiohazard;
   faMoneyBill = faMoneyBill;
   faInfo = faInfo;
   faSave = faSave;
-  faUserPlus = faUserPlus;
-  faTimes = faTimes;
+  faClipboardList=faClipboardList;
+  faIdBadge=faIdBadge;
+  faTags=faTags;
+  faLayerGroup=faLayerGroup;
 
-  usuario : User;
-  articulo : Articulo;
+  usuario : User=new User();
+  articulo : Articulo =new Articulo();
+  articulosUser : Articulo[] = [];
+  articuloUser : Articulo = new Articulo();
 
   constructor(private articuloService: ArticuloService,
               private activatedRoute : ActivatedRoute,
@@ -44,9 +47,23 @@ export class ArticuloCardComponent implements OnInit {
 
   infoUsuario(id : number): void{
     //alert("mmmmm Id " + this.id_nuevo)
-    this.usuarioService.retrieve(id).subscribe(
-      result => this.usuario = result
-    )
+    this.usuarioService.retrieve(id).subscribe(result => {
+      this.usuario = result;
+    })
+    this.articuloService.list(id).subscribe(res=>{
+      this.articulosUser=res;
+    })
   }
+
+  listIdUser(criterio){
+    this.articulosUser.forEach((x,i)=>{
+      console.log(x.categoria +'---' + criterio)
+      if(x.categoria===criterio){
+        this.articuloUser=x
+      }
+    })
+  }
+
+
 
 }

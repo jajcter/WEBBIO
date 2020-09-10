@@ -1,93 +1,137 @@
-<br>
-<div class="d-flex justify-content-around">
-    <div class="media">
-        <div class="media-left">
-            <fa-icon class="mr-3 fa-2x" [icon]='faBiohazard'></fa-icon>
+<div class="row">
+  <div class="col-6">
+    <div class="tab-content" id="v-pills-tabContent">
+      <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="mascarillas" role="tabpanel" aria-labelledby="mascarillas-tab">
+          Mascarillas
+          <div class="row">
+            <div class="col-md-4" *ngFor="let articulo of articulosUser">
+              <app-articulo [articuloItem]="articulo"></app-articulo>
+            </div>
+          </div>
         </div>
-        <div class="media-body">
-            <small class="media-heading">Nombre</small>
-            <p class="h6"><strong>{{articulo.nombre}}</strong></p>
+        <div class="tab-pane fade" id="traje" role="tabpanel" aria-labelledby="traje-tab">Trajes de Bioseguridad
+          <div class="row">
+            <div class="col-md-4" *ngFor="let articulo of articulosUser">
+              <app-articulo [articuloItem]="articulo"></app-articulo>
+            </div>
+          </div>
         </div>
+        <div class="tab-pane fade" id="guantes" role="tabpanel" aria-labelledby="guantes-tab">Guantes
+          <div class="row">
+            <div class="col-md-4" *ngFor="let articulo of articulosUser">
+              <app-articulo [articuloItem]="articulo"></app-articulo>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="otros" role="tabpanel" aria-labelledby="otros-tab">Otros
+          <div class="row">
+            <div class="col-md-4" *ngFor="let articulo of articulosUser">
+              <app-articulo [articuloItem]="articulo"></app-articulo>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="media">
-        <div class="media-left">
-            <fa-icon class="mr-3 fa-2x" [icon]='faMoneyBill'></fa-icon>
+  </div>
+  <div class="col-6">
+
+    <div class="card mb-3" >
+      <div class="row no-gutters">
+        <div class="col-md-7">
+          <div class="card-body">
+            <div class="row d-flex justify-content-around">
+              <div class="col border-right">
+                <div class="media ">
+                  <div class="media-left">
+                    <fa-icon class="mr-3 fa-2x" [icon]='faLayerGroup'></fa-icon>
+                  </div>
+                  <div class="media-body">
+                    <small class="media-heading">Nombre</small>
+                    <p class="h6"><strong>{{articulo.nombre}}</strong></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col border-right">
+                <div class="media">
+                  <div class="media-left">
+                    <fa-icon class="mr-3 fa-2x" [icon]='faMoneyBill'></fa-icon>
+                  </div>
+                  <div class="media-body">
+                    <small class="media-heading">Precio</small>
+                    <p class="h6"><strong>{{articulo.precio |currency}}</strong></p>
+                  </div>
+                </div>
+              </div>
+            </div><hr>
+
+            <div class="row d-flex justify-content-around">
+              <div class="col border-right">
+                <div class="media">
+                  <div class="media-left">
+                    <fa-icon class="mr-3 fa-2x" [icon]='faClipboardList'></fa-icon>
+                  </div>
+                  <div class="media-body">
+                    <small class="media-heading">Estado</small>
+                    <p class="h6"><strong>{{articulo.estado}}</strong></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="media">
+                  <div class="media-left">
+                    <fa-icon class="mr-3 fa-2x" [icon]='faTags'></fa-icon>
+                  </div>
+                  <div class="media-body">
+                    <small class="media-heading">Categoria</small>
+                    <p class="h6"><strong>{{articulo.categoria}}</strong></p>
+                  </div>
+                </div>
+              </div>
+            </div><hr>
+
+            <div class="row d-flex justify-content-around">
+              <div class="col">
+                <div class="media">
+                  <div class="media-left">
+                    <fa-icon class="mr-3 fa-2x" [icon]='faInfo'></fa-icon>
+                  </div>
+                  <div class="media-body">
+                    <small class="media-heading">Detalle</small>
+                    <p class="h6"><strong>{{articulo.detalle}}</strong></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
-        <div class="media-body">
-            <small class="media-heading">Precio</small>
-            <p class="h6"><strong>{{articulo.precio }}</strong></p>
+        <div class="col-md-5">
+          <img src="https://image.freepik.com/vector-gratis/medicos-trabajadores-bioseguridad-elementos-equipo-proteccion-covid19_18591-66735.jpg" class="card-img" alt="...">
         </div>
-    </div>
-    <div class="media">
-        <div class="media-left">
-            <fa-icon class="mr-3 fa-2x" [icon]='faInfo'></fa-icon>
-        </div>
-        <div class="media-body">
-            <small class="media-heading">Categoria</small>
-            <p class="h6"><strong>{{articulo.categoria }}</strong></p>
-        </div>
+      </div>
     </div>
 
-</div>
-<hr>
-<div class="d-flex justify-content-around">
-    <div class="media">
-        <div class="media-left">
-            <fa-icon class="mr-3 fa-2x" [icon]='faInfo'></fa-icon>
+    <div class="card mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-4 p-0 m-0 d-flex justify-content-around">
+          <img src="https://kronsa.com.ar/wp-content/uploads/2020/05/BIOSEGURIDAD-1024x432.jpg" class="rounded align-self-center mr-3 img-fluid" alt="...">
         </div>
-        <div class="media-body">
-            <small class="media-heading">Detalle</small>
-            <p class="h6"><strong>{{articulo.detalle}}</strong></p>
+        <div class="col-md-8">
+          <div class="card-body p-0 m-0">
+            <h6 class="card-title p-0 m-0"><fa-icon [icon]='faIdBadge'></fa-icon> Propietario</h6>
+            <p class="card-text p-0 m-0">{{usuario.nombres}} &nbsp;{{usuario.apellidos}}</p>
+            <p class="card-text p-0 m-0"><small class="media-heading">Dirección: &nbsp;</small><small class="text-muted">{{usuario.direccion}}</small></p>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="media">
-        <div class="media-left">
-            <fa-icon class="mr-3 fa-2x" [icon]='faTimes'></fa-icon>
-        </div>
-        <div class="media-body">
-            <small class="media-heading">Estado</small>
-            <p class="h6"><strong>{{articulo.estado}}</strong></p>
-        </div>
-    </div>
-</div>
-<hr>
-<br>
 
-<div>
-    <div class="text-center">
-        <fa-icon class="fa-2x"></fa-icon>
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link active" id="mascarillas-tab" data-toggle="pill" href="#mascarillas" role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="listIdUser('Mascarillas')">Mascarillas</a>
+      <a class="nav-link" id="traje-tab" data-toggle="pill" href="#traje" role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="listIdUser('Guantes')">Trajes de Bioseguridad</a>
+      <a class="nav-link" id="guantes-tab" data-toggle="pill" href="#guantes" role="tab" aria-controls="v-pills-messages" aria-selected="false" (click)="listIdUser('Trajes')">Guantes</a>
+      <a class="nav-link" id="otros-tab" data-toggle="pill" href="#otros" role="tab" aria-controls="v-pills-settings" aria-selected="false" (click)="listIdUser('Otros')">Otros</a>
     </div>
-    <hr>
-    <h5>Listado de usuarios</h5>
-    <table class="table table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th>
-                    Nombres
-                </th>
-                <th>
-                    Apellidos
-                </th>
-                <th>
-                    Direccion
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    {{usuario.nombres}}
-                </td>
-                <td>
-                    {{usuario.apellidos}}
-                </td>
-                <td>
-                    {{usuario.direccion}}
-                </td>
-                
-            </tr>
-
-        </tbody>
-    </table>
+  </div>
 </div>

@@ -4,6 +4,7 @@ import { Articulo } from 'src/app/models/articulo/articulo';
 import { ArticuloService } from 'src/app/services/articulo/articulo.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faBiohazard, faMoneyBill, faInfo, faSave, faTimes, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { NewArticulo } from 'src/app/models/new-articulo';
 
 @Component({
   selector: 'app-articulo-form',
@@ -31,18 +32,22 @@ export class ArticuloFormComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    this.inputForm();
+    this.cagarID();
+  }
+
+  cagarID(){
+    console.log('lleva al ngOnInit - articulo Form')
     this.activatedRoute.params.subscribe(
       params => {
         if(params['id']){
           this.id_nuevo=params['id'];
         }
         this.articulo.idUsuario=this.id_nuevo;
-        //console.log("Mira este objeto: " + this.articulo.nombre);
+        console.log("Mira este objeto: " + this.articulo.nombre);
       }
     );
-    this.inputForm();
   }
-
   inputForm():void{
     this.form = this.formBuilder.group({
       precio:  [''],
@@ -58,7 +63,9 @@ export class ArticuloFormComponent implements OnInit {
   }
 
   onSubmit() : void {
-
+  this.cagarID()
+console.log('Artivulo form')
+console.log(this.articulo)
     this.submitted = true;
 
     if(this.form.invalid){

@@ -31,8 +31,12 @@ export class AuthService {
   getToken(){
     return localStorage.getItem('token');
   }
+  getID(){
+    return localStorage.getItem('id');
+  }
   logOut(){//cerrar sesión
     localStorage.removeItem('token');
+    localStorage.removeItem('name');
     return this.http.post<any>(this.url+'/Usuarios/LogOut/'+localStorage.getItem('id'),localStorage.getItem('id'));
   }
 }

@@ -17,6 +17,7 @@ import { UsuarioCardComponent } from "./component/alan/card-main/usuario-card/us
 import { DetalleCarritoComponent } from "./component/alan/carrito-main/detalle-carrito/detalle-carrito.component";
 import { UsuarioMainComponent } from "./component/alan/usuario-main/usuario-main.component";
 import { HomeMainComponent } from './component/alan/home-main/home-main.component';
+import { AuthService } from './services/auth.service';
 //step:1 -> constantre
 
 const routes :Routes=[
@@ -37,8 +38,8 @@ const routes :Routes=[
   {path: 'nuevo_articulo/:id', component: ArticuloFormComponent},
   {path: 'editar_articulo/:id', component: ArticuloUsuarioComponent},
   {path:  'articulos/:criterio/:id',component:ArticuloCardComponent},
-  {path: 'usuarios/:id', component: UsuarioCardComponent},
-  {path:  'usuarios',component:UsuarioMainComponent},
+  {path: 'usuarios/:id', component: UsuarioCardComponent,canActivate:[AuthGuard]},
+  //{path:  'usuarios',component:UsuarioMainComponent},
   {path:  'detalleCart',component:DetalleCarritoComponent}
 
 ]

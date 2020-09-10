@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
       this.user2 = user;
+
       this.loggedIn = (user != null);
     });
     this.form= this.formBuilder.group({
@@ -47,9 +48,9 @@ export class LoginComponent implements OnInit {
     //this.user.password=this.user.password.toLowerCase();//MAYUSCULAS
     if (this.form.valid){
       this.authServices.singIn(this.user).subscribe(res=>{
-        alertify.set('notifier','position', 'top-right');//posiscion
+        alertify.set('notifier','position','top-right');//posiscion
+        this.addToken(res.id_logueado,res.token,res.nombre);
         alertify.success('Administrador: Bienvenido' );
-        this.addToken(res.id_logueado,res.token);
 
         this.router.navigate(['/']);
       },err=>{
@@ -66,7 +67,14 @@ export class LoginComponent implements OnInit {
 
   //login y logout sociales
   signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.authService.authState.subscribe((user) => {
+      this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+      alertify.set('notifier','position', 'top-right');//posiscion
+      alertify.success('Administrador: Bienvenido' );
+
+      this.user2 = user;
+      this.loggedIn = (user != null);
+    });
   }
 
   signInWithFB(): void {
@@ -77,8 +85,9 @@ export class LoginComponent implements OnInit {
     this.authService.signOut();
   }
 
-  addToken(id_log,token){
+  addToken(id_log,token,nombre){
     localStorage.setItem('id',id_log)//guardamos el id del usuario logueado
     localStorage.setItem('token',token)//guardamos el token
+    localStorage.setItem('name',nombre)//guardamos el nombre completo
   }
 }

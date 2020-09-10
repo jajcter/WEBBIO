@@ -9,9 +9,9 @@
         <a class="nav-item nav-link" routerLink="/tienda">Tienda</a>
       </li>
       <li class="nav-item">
-        <a class="nav-item nav-link" routerLink="/login">Vender</a>
+        <a class="nav-item nav-link" [routerLink]="['/usuarios',authService.getID()]">Vender</a>
       </li>
       <li class="nav-item">
-        <a class="nav-item nav-link" routerLink="/register" tabindex="-1" aria-disabled="true">Crear cuenta</a>
+        <a class="nav-item nav-link" routerLink="/register" *ngIf="!authService.logIn()" >Crear cuenta</a>
       </li>
     </ul>
