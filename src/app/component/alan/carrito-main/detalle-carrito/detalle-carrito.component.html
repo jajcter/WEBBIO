@@ -1,98 +1,100 @@
 <div class="text-center">
-    <fa-icon class="fa-2x"></fa-icon>
+  <fa-icon class="fa-2x"></fa-icon>
 </div>
 <hr>
 <h5>Detalle del carrito</h5>
 <table class="table table-hover">
-    <thead class="thead-dark">
-        <tr>
-            <th>
-                Imagen
-            </th>
-            <th>
-                Nombre
-            </th>
-            <th>
-                Precio
-            </th>
-            <th>
-                Cantidad
-            </th>
-            <th>
-                Detalle
-            </th>
-            <th>
-                Subtotal
-            </th>
-            <th>
-                Unidad
-            </th>
-            <th>
-                Usuario
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody >
-        <tr *ngFor="let item of carrito; index as i">
-            <td>
-                {{item.src}}
-            </td>
-            <td>
-                {{item.nombre }}
-            </td>
-            <td>
-                <!--onchange="sumar(this.value);"-->
-                <label>{{item.precio}}</label>
-            </td>
-            <td>
-                {{item.cantidad}}
-            </td>
-            <td><!--Sub total-->
-                <div class="form-group">
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    #n22 (keyup)="0" value="1" (keyup)="onKey($event, item.precio, i)">
-                    <small id="emailHelp" class="form-text text-muted">{{texto}}</small>
-                </div>
-            </td>
-            <td>
-                <span id="spTotal" >{{totalVenta((item.precio),(n22.value))}} * Iva = {{(item.precio*1)*(n22.value*1)*0.12}}</span>
-            </td>
-            <td>
-                {{item.estado}}
-            </td>
-            <td>
-                <div class="btn-group">
-                    <button class="btn btn-outline-danger">
-                        <fa-icon [icon]="faEnvelope"></fa-icon>Mensaje
-                    </button>
-                    <button [routerLink]="['/usuarios', item.idUsuario]" class="btn btn-outline-info">
-                      {{item.usuario.nombres}} {{item.usuario.apellidos}}
-                  </button>
-                </div>
-            </td>
-            <td class="btn-group">
-                <button (click)="comprarArticulo(item, n22.value*1, (item.precio*1)*(n22.value*1))" class="btn btn-outline-danger">
-                    <fa-icon [icon]="faDollarSign"></fa-icon> comprar
-                </button>
-                <button (click)="deleteTask(item)" class="btn btn-outline-danger">
-                    <fa-icon [icon]="faTrash"></fa-icon> Borrar del carrito
-                </button>
-            </td>
-        </tr>
-    </tbody>
+  <thead class="thead-dark">
+    <tr>
+      <th>
+        Imagen
+      </th>
+      <th>
+        Nombre
+      </th>
+      <th>
+        Precio
+      </th>
+      <th>
+        Cantidad
+      </th>
+      <th>
+        Detalle
+      </th>
+      <th>
+        Subtotal
+      </th>
+      <th>
+        Unidad
+      </th>
+      <th>
+        Usuario
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of carrito; index as i">
+      <td>
+        {{item.src}}
+      </td>
+      <td>
+        {{item.nombre }}
+      </td>
+      <td>
+        <!--onchange="sumar(this.value);"-->
+        <label>{{item.precio}}</label>
+      </td>
+      <td>
+        {{item.cantidad}}
+      </td>
+      <td>
+        <!--Sub total-->
+        <div class="form-group">
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" #n22 (keyup)="0"
+            value="1" (keyup)="onKey($event, item.precio, i)">
+          <small id="emailHelp" class="form-text text-muted">{{texto}}</small>
+        </div>
+      </td>
+      <td>
+        <span id="spTotal">{{totalVenta((item.precio),(n22.value))}} * Iva =
+          {{(item.precio*1)*(n22.value*1)*0.12}}</span>
+      </td>
+      <td>
+        {{item.estado}}
+      </td>
+      <td>
+        <div class="btn-group">
+          <button class="btn btn-outline-danger">
+            <fa-icon [icon]="faEnvelope"></fa-icon>Mensaje
+          </button>
+          <button [routerLink]="['/usuarios', item.idUsuario]" class="btn btn-outline-info">
+            {{item.usuario.nombres}} {{item.usuario.apellidos}}
+          </button>
+        </div>
+      </td>
+      <td class="btn-group">
+        <a href="https://wa.me/5211234567890?text=Me%20gustaría%20saber%20el%20precio%20del%20coche" class="whatsapp" target="_blank">
+          <i class="fa fa-whatsapp whatsapp-icon"></i>wht
+        </a>
+        <button (click)="comprarArticulo(item, n22.value*1, (item.precio*1)*(n22.value*1))" class="btn btn-outline-danger">
+          <fa-icon [icon]="faDollarSign"></fa-icon> comprar
+        </button>
+        <button (click)="deleteTask(item)" class="btn btn-outline-danger">
+          <fa-icon [icon]="faTrash"></fa-icon> Borrar del carrito
+        </button>
+      </td>
+    </tr>
+  </tbody>
 </table>
-<div>
-    <span>Iva 12%</span>
-</div>
-<div class="input-group mb-2 mr-sm-2">
-    <div class="input-group-prepend">
-        <div class="input-group-text">Total</div>
-    </div>
-    <!--input #box (keyup)="0" (click)="comprarVenta($event)" type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder=""-->
 
-    <span>{{total}}</span>
+<div class="row text-center">
+  <div class="col"><span>Iva 12%</span></div>
+  <div class="col"></div>
+  <div class="col">Total:<span>{{total}}</span></div>
 </div>
+<!--input #box (keyup)="0" (click)="comprarVenta($event)" type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder=""-->
 <div class="text-center">
-    <button (click)="comprarArticulos()" type="button" class="btn btn-primary btn-block"><strong>Comprar Todo</strong></button>
+  <button (click)="comprarArticulos()" type="button" class="btn btn-primary btn-block"><strong>Comprar
+      Todo</strong></button>
 </div>

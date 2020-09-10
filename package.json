@@ -31,8 +31,10 @@
     "boostrap": "^2.0.0",
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
+    "ng2-charts": "^2.4.1",
     "rxjs": "~6.5.5",
     "rxjs-compat": "^6.6.2",
+    "sweetalert2": "^10.0.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },

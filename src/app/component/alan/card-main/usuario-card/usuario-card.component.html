@@ -1,90 +1,88 @@
-<br>
-<div class="container">
-  <div class="d-flex justify-content-around">
-    <div class="media">
-      <div class="media-left">
-        <fa-icon class="mr-3 fa-2x" [icon]='faUserAlt'></fa-icon>
-      </div>
-      <div class="media-body">
-        <small class="media-heading">Nombre</small>
-        <h6>{{usuario.nombres}}</h6>
-      </div>
-    </div>
-    <div class="media">
-      <div class="media-left">
-        <fa-icon class="mr-3 fa-2x" [icon]='faUser'></fa-icon>
-      </div>
-      <div class="media-body">
-        <small class="media-heading">Apellidos</small>
-        <p class="h6"><strong>{{usuario.apellidos }}</strong></p>
-      </div>
-    </div>
-    <div class="media">
-      <div class="media-left">
-        <fa-icon class="mr-3 fa-2x" [icon]='faMapMarkedAlt'></fa-icon>
-      </div>
-      <div class="media-body">
-        <small class="media-heading">Direccion</small>
-        <p class="h6"><strong>{{usuario.direccion }}</strong></p>
-      </div>
-    </div>
-
-  </div>
-  <hr>
-  <div class="d-flex justify-content-around">
-    <div class="media">
-      <div class="media-left">
-        <fa-icon class="mr-3 fa-2x" [icon]='faPhone'></fa-icon>
-      </div>
-      <div class="media-body">
-        <small class="media-heading">Telefono</small>
-        <p class="h6"><strong>{{usuario.telefono}}</strong></p>
-      </div>
-    </div>
-    <div class="media">
-      <div class="media-left">
-        <fa-icon class="mr-3 fa-2x" [icon]='faAt'></fa-icon>
-      </div>
-      <div class="media-body">
-        <small class="media-heading">Email</small>
-        <p class="h6"><strong>{{usuario.email}}</strong></p>
-      </div>
-    </div>
-  </div>
-  <hr>
-  <br>
+<div class="text-center">
+  <fa-icon class="fa-2x" [icon]="faUserPlus"></fa-icon>
 </div>
-<div class="container">
-  <div class="row">
-    <!--
-    <div class="col text-center">
-      <button [routerLink]="['/nuevo_articulo', usuario.idUsuario]" type="button" class="btn btn-primary">Nuevo
-        articulo</button>
-    </div>
-    -->
-    <div class="col text-center">
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#miModal">
-        Nuevo articulo</button>
-    </div>
-  </div>
-  <hr>
-  <br>
-</div>
-<!--miralo-->
-<app-articulo-tabla (articuloToEdit)="toUpdate($event)" [flagToReload]="mainReload" (reloadComplete)="reloadDone($event)"></app-articulo-tabla>
-<!---->
-<div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">{{mainTitle}}</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+<form [formGroup]="form"  class="user">
+  <div class="card-body">
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text"><fa-icon [icon]='faUserPlus'></fa-icon></span>
+          </div>
+          <input formControlName="nombres" type="text" class="form-control form-control-user" [(ngModel)]="usuario.nombres"
+              [ngClass]="{'is-invalid': submitted && f.nombres.errors}"
+              placeholder="Nombres" />
+          <div *ngIf="submitted && f.nombres.errors" class="invalid-feedback">
+              <div *ngIf="f.nombres.errors.required">Los nombres son requeridos </div>
+              <div *ngIf="f.nombres.errors.minlength">Los nombres debe tener maximo 50 caracteres</div>
+          </div>
       </div>
-      <div class="modal-body">
-        <app-articulo-form [articulo]="mainArticulo" [title]="mainTitle" (flagToReload)="toReload($event)"></app-articulo-form>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text"><fa-icon [icon]='faIdCard'></fa-icon></span>
+          </div>
+          <input formControlName="apellidos" type="text" class="form-control form-control-user"
+              [(ngModel)]="usuario.apellidos"
+              [ngClass]="{'is-invalid': submitted && f.apellidos.errors}"
+              placeholder="Apellidos" />
+          <div *ngIf="submitted && f.apellidos.errors" class="invalid-feedback">
+              <div *ngIf="f.apellidos.errors.required">Los apellidos son requeridos </div>
+              <div *ngIf="f.apellidos.errors.minlength">Los apellidos debe tener maximo 50 caracteres</div>
+          </div>
       </div>
-    </div>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text"><fa-icon [icon]='faMapMarkedAlt'></fa-icon></span>
+          </div>
+          <input formControlName="direccion" type="text" class="form-control form-control-user" [(ngModel)]="usuario.direccion"
+              [ngClass]="{'is-invalid': submitted && f.direccion.errors}"
+              placeholder="Direccion" />
+          <div *ngIf="submitted && f.direccion.errors" class="invalid-feedback">
+              <div *ngIf="f.direccion.errors.required">La direccion es requerida </div>
+              <div *ngIf="f.direccion.errors.minlength">La direccion debe tener maximo 100 caracteres</div>
+          </div>
+      </div>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text"><fa-icon [icon]='faPhone'></fa-icon></span>
+          </div>
+          <input formControlName="telefono" type="text" class="form-control form-control-user" [(ngModel)]="usuario.telefono"
+              [ngClass]="{'is-invalid': submitted && f.telefono.errors}"
+              placeholder="Telefono" />
+          <div *ngIf="submitted && f.telefono.errors" class="invalid-feedback">
+              <div *ngIf="f.telefono.errors.required">El telefono es requerido </div>
+              <div *ngIf="f.telefono.errors.minlength">El telefono debe tener maximo 16 caracteres</div>
+          </div>
+      </div>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text"><fa-icon [icon]='faAt'></fa-icon></span>
+          </div>
+          <input formControlName="email" type="text" class="form-control form-control-user" [(ngModel)]="usuario.email"
+              [ngClass]="{'is-invalid': submitted && f.email.errors}"
+              placeholder="Email" />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">El email es requerido </div>
+              <div *ngIf="f.email.errors.minlength">El email debe tener maximo 100 caracteres</div>
+          </div>
+      </div>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text"><fa-icon [icon]='faUnlock'></fa-icon></span>
+          </div>
+          <input formControlName="contrasena" type="password" class="form-control form-control-user" [(ngModel)]="usuario.contrasena"
+              [ngClass]="{'is-invalid': submitted && f.contrasena.errors}"
+              placeholder="Contraseña" />
+          <div *ngIf="submitted && f.contrasena.errors" class="invalid-feedback">
+              <div *ngIf="f.contrasena.errors.required">La contraseña es requerida </div>
+              <div *ngIf="f.contrasena.errors.minlength">La contraseña debe tener maximo 50 caracteres</div>
+          </div>
+      </div>
+      <div class="btn-group">
+          <button type="submit" (click)="onSubmit()" class="btn btn-outline-secondary">
+              <fa-icon [icon]='faSave' ></fa-icon>&nbsp;Guardar
+          </button>
+          <button type="reset" data-dismiss="modal" aria-label="Close" (click)="onReset()" class="btn btn-outline-dark">
+              <fa-icon [icon]='faTimes'></fa-icon>&nbsp;Cerrar
+          </button>
+      </div>
   </div>
-</div>
+</form>

@@ -5,6 +5,7 @@ import { ArticuloService } from 'src/app/services/articulo/articulo.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faBiohazard, faMoneyBill, faInfo, faSave, faTimes, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { NewArticulo } from 'src/app/models/new-articulo';
+declare let alertify: any
 
 @Component({
   selector: 'app-articulo-form',
@@ -13,7 +14,7 @@ import { NewArticulo } from 'src/app/models/new-articulo';
 })
 export class ArticuloFormComponent implements OnInit {
 
-  id_nuevo : number;
+  id_nuevo;
   form: FormGroup;
   submitted: boolean = false;
 
@@ -24,7 +25,7 @@ export class ArticuloFormComponent implements OnInit {
   faUserPlus = faUserPlus;
   faTimes = faTimes;
 
-  @Input() articulo : Articulo;
+  @Input() articulo : Articulo=new Articulo();
 
   constructor(private articuloService : ArticuloService,
               private formBuilder: FormBuilder,
@@ -32,21 +33,15 @@ export class ArticuloFormComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.inputForm();
     this.cagarID();
+    this.inputForm();
   }
 
   cagarID(){
     console.log('lleva al ngOnInit - articulo Form')
-    this.activatedRoute.params.subscribe(
-      params => {
-        if(params['id']){
-          this.id_nuevo=params['id'];
-        }
-        this.articulo.idUsuario=this.id_nuevo;
-        console.log("Mira este objeto: " + this.articulo.nombre);
-      }
-    );
+    if(localStorage.getItem('token')){
+      this.id_nuevo=localStorage.getItem('token')
+    }
   }
   inputForm():void{
     this.form = this.formBuilder.group({
@@ -63,20 +58,19 @@ export class ArticuloFormComponent implements OnInit {
   }
 
   onSubmit() : void {
-  this.cagarID()
-console.log('Artivulo form')
-console.log(this.articulo)
     this.submitted = true;
-
     if(this.form.invalid){
       console.error('Error en formulario');
       return;
     }
-
-    this.articuloService.save(this.articulo,this.id_nuevo).subscribe(
-      result => {
+    this.id_nuevo=localStorage.getItem('token')
+    this.articuloService.save(this.articulo,this.id_nuevo).subscribe(result => {
         this.submitted = false;
-        //this.router.navigate(['usuarios']);
+        alertify.success('Se agregó un nuevo producto');
+        this.router.navigate(['Miscompra  s']);
+      },err=>{
+        alertify.error('Error del servidor');
+        console.log(err)
       }
     );
   }

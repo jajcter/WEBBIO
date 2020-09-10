@@ -24,7 +24,7 @@ export class HomeMainComponent implements OnInit {
   ngOnInit(): void {
     this.onInit();
     this.obtener_localstorage();
-    this.articuloService.listArticulo('Mascarillas').subscribe(res=>{
+    this.articuloService.listArticulos('Mascarillas').subscribe(res=>{
       this.listArticulo=res;
     })
     //Eliminar de local storage
@@ -66,7 +66,7 @@ export class HomeMainComponent implements OnInit {
   }
 
   listArticulos(criterio){
-    this.articuloService.listArticulo(criterio).subscribe(res=>{
+    this.articuloService.listArticulos(criterio).subscribe(res=>{
       this.listArticulo=res;
     })
   }

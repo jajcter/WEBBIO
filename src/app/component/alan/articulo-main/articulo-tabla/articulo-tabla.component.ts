@@ -61,8 +61,6 @@ export class ArticuloTablaComponent implements OnInit {
   }
 
   update(a:Articulo) :void {
-    console.log('articulo tabla')
-    console.log(a)
     this.ArticuloToEdit.emit(a);
   }
 

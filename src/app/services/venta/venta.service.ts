@@ -30,11 +30,14 @@ export class VentaService {
 
   }
 
-  idVenta() : Observable<any> {
+  idVenta() : Observable<any> {//no usado
     return this.http.get<Venta>(this.url + "?dato=1&edato=2", this.httpOptions)
       .pipe(
         retry(1)
       );
+  }
+  ventaUsuario():Observable<any>{
+    return this.http.get<Venta>(this.url+'/GetVentas/'+localStorage.getItem('id'),this.httpOptions).pipe(retry(1))
   }
 
 }

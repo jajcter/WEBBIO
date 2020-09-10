@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/models/user/user';
 import { UserService } from 'src/app/services/user/user.service';
 import { ActivatedRoute } from '@angular/router';
-import { faEye, faPencilAlt, faTrash, faUser, faIdCard, faCalendar, faMapMarked, faGenderless, faUserAlt, faMapMarkedAlt, faPhone, faAt } from '@fortawesome/free-solid-svg-icons';
+import { faEye,faSave,faUserPlus,faUnlock,faTimes, faPencilAlt, faTrash, faUser, faIdCard, faCalendar, faMapMarked, faGenderless, faUserAlt, faMapMarkedAlt, faPhone, faAt } from '@fortawesome/free-solid-svg-icons';
 import { Articulo } from 'src/app/models/articulo/articulo';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 declare let alertify:any;
 
 @Component({
@@ -13,6 +14,10 @@ declare let alertify:any;
 })
 export class UsuarioCardComponent implements OnInit {
 
+  faSave=faSave;
+  faUserPlus=faUserPlus;
+  faUnlock=faUnlock;
+  faTimes=faTimes;
   faUser = faUser;
   faTrash = faTrash;
   faPencilAlt=faPencilAlt;
@@ -26,50 +31,68 @@ export class UsuarioCardComponent implements OnInit {
   faPhone = faPhone;
   faAt = faAt;
 
-  mainArticulo : Articulo;
+  @Input() mainArticulo : Articulo;
+  @Input() usuario : User=new User();
+  @Input() title : string;
+  @Output() flagToReload = new EventEmitter<Boolean>();
+  form: FormGroup;
+  submitted: boolean = false;
+
   mainReload : boolean;
   mainTitle : string;
 
-  @Input() usuario : User=new User();
-
-  constructor(private usuarioService: UserService, private activatedRoute : ActivatedRoute ) { }
+  constructor(
+    private usuarioService: UserService,
+    private formBuilder: FormBuilder,
+    private activatedRoute : ActivatedRoute ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(
-      params => {
-        if(params['id']){
-          this.usuarioService.retrieve(params['id']).subscribe(
-            result => this.usuario = result
-          )
-        }
+
+    if(localStorage.getItem('id') !== null || localStorage.getItem('id') !== undefined){
+      this.formulario();
+      this.usuarioService.retrieve(parseInt(localStorage.getItem('id'))).subscribe(
+        result => this.usuario = result
+      )
+    }
+
+  }//end
+
+  formulario() : void{
+    this.form = this.formBuilder.group({
+      nombres:                 ['', [Validators.required, Validators.maxLength(50)]],
+      apellidos:                 ['', [Validators.required, Validators.maxLength(50)]],
+      direccion:                 ['', [Validators.required, Validators.maxLength(100)]],
+      telefono:                 ['', [Validators.required, Validators.maxLength(16)]],
+      email:                 ['', [Validators.required, Validators.maxLength(100)]],
+      contrasena:                 ['', [Validators.required, Validators.maxLength(50)]]
+    });
+  }//end
+  get f(){
+    return this.form.controls;
+  }
+
+  onSubmit() : void {
+
+    this.submitted = true;
+
+    if(this.form.invalid){
+      console.error('Error en formulario');
+      return;
+    }
+
+    this.usuarioService.save(this.usuario).subscribe(
+      result => {
+        this.submitted = false;
+        console.log(result);
+        this.flagToReload.emit(true);
       }
     );
-    this.onInit();
   }
 
-  onInit() : void {
-
-    console.log('this.mainArticulo-usuario-card');
-    console.log(this.mainArticulo);
-    this.mainArticulo = new Articulo();
-    this.mainReload = false;
-  }
-
-  toUpdate($event) : void{
-    console.log('event-uptade-usuario-card')
-    console.log(event)
-    this.mainArticulo = $event;
-    //this.mainUsuario.fecha_nacimiento = this.mainUsuario.fecha_nacimiento.replace("T00:00:00","");
-  }
-  toReload($event) : void {
-    this.onInit();
-    //alert('Mira como esta este objeto: ' + $event)
-    //console.log("Mira este evento = " + $event);
-    this.mainReload = $event;
-  }
-
-  reloadDone($event){
-    this.mainReload = !$event;
+  onReset() : void {
+    this.submitted = false;
+    this.form.reset();
+    this.usuario = new User();
   }
 
 }

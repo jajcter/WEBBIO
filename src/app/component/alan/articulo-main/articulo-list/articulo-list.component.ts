@@ -51,7 +51,7 @@ export class ArticuloListComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       params => {
         if(params['criterio']){
-          this.articuloService.listArticulo(params['criterio']).subscribe(
+          this.articuloService.listArticulos(params['criterio']).subscribe(
             result => this.articulos = result
           )
         }

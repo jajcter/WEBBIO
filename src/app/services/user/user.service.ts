@@ -27,7 +27,7 @@ export class UserService {
     if(a.idUsuario === undefined){
       return this.http.post<any>(this.url+'/Post', usuarioBody, this.httpOptions);
     }
-    return this.http.post<any>(this.url, usuarioBody, this.httpOptions);
+    return this.http.put<any>(this.url+'/Put', usuarioBody, this.httpOptions);
   }
 
   retrieve(id:number): Observable<User> {

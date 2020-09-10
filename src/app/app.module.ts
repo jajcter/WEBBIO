@@ -10,7 +10,6 @@ import { LogoutComponent } from './login-main/logout/logout.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProducUserComponent } from './component/main-user/product-main/produc-user/produc-user.component';
 import { HeaderUserComponent } from './header-user/header-user.component';
-import { ArticuloService } from "./services/articulo/articulo.service";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AuthGuard } from "./auth.guard";
@@ -63,6 +62,7 @@ import {
 
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { ModalComponent } from './header/modal/modal.component';
+import { VentaService } from './services/venta/venta.service';
 
 
 @NgModule({
@@ -147,7 +147,11 @@ import { ModalComponent } from './header/modal/modal.component';
       ],
     } as SocialAuthServiceConfig,
   },
-
+  VentaService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: ServicesInterceptor,
+    multi: true
+  },
     UserService,{
       provide: HTTP_INTERCEPTORS,
       useClass: ServicesInterceptor,

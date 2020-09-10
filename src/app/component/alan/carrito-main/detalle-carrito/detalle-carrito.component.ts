@@ -86,6 +86,7 @@ export class DetalleCarritoComponent implements OnInit {
         alertify.error('Su compra fue cancelada por falta de artículos');
 
       }else{
+
         alertify.confirm('Confirmación de compra','¿Desea realizar la siguiente compra?',
         ()=>{//compilar codigo dentro de "alertify"
           alertify.set('notifier','position', 'top-right');//posiscion
@@ -142,8 +143,10 @@ export class DetalleCarritoComponent implements OnInit {
       }
 
     }//end iff token
-    alertify.success('Inicie sesión')
-    this.router.navigate(['/login'])
+    else{
+      alertify.error('Inicie sesión')
+      this.router.navigate(['/login'])
+    }
 
 
   }//end compraArticulos

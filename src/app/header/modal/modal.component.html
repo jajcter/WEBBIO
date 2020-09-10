@@ -6,13 +6,14 @@
   </div>
 
   <form class=" form-inline ">
+    <button type="button" class="btn btn-primary float-left"  routerLink="/Miscompras">Mis Compras</button>
     <button type="button" class="btn btn-primary float-left" data-toggle="modal" data-target="#carrito"  data-aos="flip-left"><fa-icon [icon]='faShoppingCart'></fa-icon></button>
     <a class="btn btn-outline-primary" routerLink="/login" data-aos="flip-right" *ngIf="user2 || !authServices.logIn() ">Iniciar secion</a>
     <div class="container user-loged" data-aos="flip-right" *ngIf="user2">
       <div class="row">
         <img class="rounded-circle" src="{{ user2.photoUrl }}">
         <div class="col justify-content-center">
-          <p class="text-truncate">{{ user2.firstName }}</p>
+          <button class="text-truncate" [routerLink]="['/usuarios',authServices.getID()]">{{ user2.firstName }}</button>
           <button class="salir" routerLink="/login" (click)="signOut()">Salir</button>
         </div>
       </div>
@@ -21,7 +22,7 @@
       <div class="row">
         <img class="rounded-circle" src="{{ user.img }}" alt="Img-User">
         <div class="col justify-content-center">
-          <p class="text-truncate">{{ user.nombre }}</p>
+          <button class="salir" [routerLink]="['/usuarios',authServices.getID()]">{{ user.nombre }}</button><br>
           <button class="salir" routerLink="/login" (click)="logOut()">Salir</button>
         </div>
       </div>

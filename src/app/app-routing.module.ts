@@ -3,21 +3,22 @@ import { Routes,RouterModule} from '@angular/router'
 import { LoginComponent } from './login-main/login/login.component';
 import { LogoutComponent } from './login-main/logout/logout.component';
 import { AuthGuard } from './auth.guard';
-import { ProductListClientComponent } from './component/main-client/produc-main-client/product-list-client/product-list-client.component';
+//import { ProductListClientComponent } from './component/main-client/produc-main-client/product-list-client/product-list-client.component';
 import { HomeComponent } from './component/main-client/home/home.component';
 import { PerfilUserComponent } from './component/main-user/perfil-user/perfil-user.component';
 import { RegisterComponent } from './login-main/register/register.component';
 //Alam
 import { ArticuloMainComponent } from './component/alan/articulo-main/articulo-main.component';
 import { ArticuloCardComponent } from "./component/alan/card-main/articulo-card/articulo-card.component";
-import { ArticuloFormComponent } from './component/alan/articulo-main/articulo-form/articulo-form.component';
+//import { ArticuloFormComponent } from './component/alan/articulo-main/articulo-form/articulo-form.component';
 import { ArticuloUsuarioComponent } from "./component/alan/articulo-main/articulo-usuario/articulo-usuario.component";
 import { UsuarioCardComponent } from "./component/alan/card-main/usuario-card/usuario-card.component";
 
 import { DetalleCarritoComponent } from "./component/alan/carrito-main/detalle-carrito/detalle-carrito.component";
-import { UsuarioMainComponent } from "./component/alan/usuario-main/usuario-main.component";
+//import { UsuarioMainComponent } from "./component/alan/usuario-main/usuario-main.component";
 import { HomeMainComponent } from './component/alan/home-main/home-main.component';
 import { AuthService } from './services/auth.service';
+import { ArticuloFormComponent } from './component/alan/articulo-main/articulo-form/articulo-form.component';
 //step:1 -> constantre
 
 const routes :Routes=[
@@ -31,11 +32,12 @@ const routes :Routes=[
   {path: '',component:HomeComponent},//INICIO
   {path: 'tienda',component:HomeMainComponent},//categoria
   //vista  del usuario
-  {path: 'Mcompras',component:PerfilUserComponent,canActivate:[AuthGuard]},
+  {path: 'Miscompras',component:PerfilUserComponent,canActivate:[AuthGuard]},
+  {path: 'vender',component:ArticuloFormComponent,canActivate:[AuthGuard]},
 
   //alan
   {path:  'articulos/:criterio', component:ArticuloMainComponent},
-  {path: 'nuevo_articulo/:id', component: ArticuloFormComponent},
+  //{path: 'nuevo_articulo/:id', component: ArticuloFormComponent},
   {path: 'editar_articulo/:id', component: ArticuloUsuarioComponent},
   {path:  'articulos/:criterio/:id',component:ArticuloCardComponent},
   {path: 'usuarios/:id', component: UsuarioCardComponent,canActivate:[AuthGuard]},

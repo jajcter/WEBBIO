@@ -22,7 +22,8 @@ export class ArticuloService {
   constructor(private http:HttpClient) { }
 //se necesita el id para validar el toquen
   save(a,idUsuario) : Observable<any> {
-    a.idUsuario=idUsuario;
+    a.idUsuario=localStorage.getItem('id');
+    console.log(a)
     let alumnoBody = JSON.stringify(a);
     if(a.idArticulo === undefined){
       return this.http.post<any>(this.url+'/Post', alumnoBody, this.httpOptions);
@@ -30,8 +31,21 @@ export class ArticuloService {
     return this.http.post<any>(this.url+'/UpDate', alumnoBody, this.httpOptions);
   }
 
-  listArticulo(criterio:string): Observable<Articulo[]> {
-    return this.http.get<Articulo[]>(this.url + "/Get?criterio=" + criterio, this.httpOptions)
+  listArticulos(criterio:string): Observable<Articulo[]> {
+    if(localStorage.getItem('token')){
+      return this.http.get<Articulo[]>(this.url + "/GetL/"+localStorage.getItem('id')+"?criterio=" + criterio, this.httpOptions)
+      .pipe(
+        retry(1)
+      );
+    }else{//si no existe token llamamos a todos
+      return this.http.get<Articulo[]>(this.url + "/Get?criterio=" + criterio, this.httpOptions)
+      .pipe(
+        retry(1)
+      );
+    }
+  }
+  listArticulosUser(criterio): Observable<Articulo[]>{
+    return this.http.post<Articulo[]>(this.url + "/ListId/"+localStorage.getItem('id')+"?criterio=" + criterio, this.httpOptions)
       .pipe(
         retry(1)
       );
@@ -56,7 +70,7 @@ export class ArticuloService {
         retry(1)
       );
   }
-  // manotoa
+  // esta funcion esta mal
   getArticulos(): Observable<Articulo[]>  {
     //Todo: Poblar Articulos desde una API y retornar una lista
       return this.http.get<Articulo[]>(this.url+'/Get');
